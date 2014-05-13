@@ -13,8 +13,8 @@ class Deluge
     end
   end
 
-  def call args, kwargs
-    @con.call *args, kwargs
+  def call *args
+    @con.call *args
   end
 
   def login username, password
