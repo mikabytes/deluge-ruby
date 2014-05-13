@@ -22,4 +22,4 @@ d.call 'webui.get_config', {}
 
 ### Methods
 
-See _lib/deluge_ for all defined methods.
+See _lib/deluge.rb_ for all defined methods.
