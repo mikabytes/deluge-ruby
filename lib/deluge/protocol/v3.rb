@@ -22,7 +22,7 @@ class Deluge
       connection = TCPSocket.new(host, port)
       ctx = OpenSSL::SSL::SSLContext.new
       ctx.set_params(verify_mode: OpenSSL::SSL::VERIFY_NONE)
-      ctx.ssl_version = :SSLv3
+      ctx.ssl_version = :TLSv1_2
 
       @con = OpenSSL::SSL::SSLSocket.new(connection, ctx)
       @con.connect
