@@ -38,7 +38,6 @@ class Deluge
             end
 
             handle_new_data(data.bytes)
-
           rescue Exception => e
             puts e.message
             p e.backtrace
@@ -122,23 +121,15 @@ class Deluge
 
     private
 
-    def handle_new_data data, &block
-      # commented code is for version 4, not yet supported
-  #    @buffer.concat(data)
-  #
-  #    while @buffer.length >= 5 # 'D' + 4 byte integer
-  #      if @message_length == 0
-  #        handle_new_message
-  #      end
-  #
-  #      if @buffer.length >= @message_length
-  #        message = @buffer.shift(@message_length)
-  #        @message_length = 0
-  #
-          message = data
-          handle_complete_message(message)
-  #      end
-  #    end
+    def handle_new_data data
+      @buffer.push(*data)
+
+      begin
+        handle_complete_message(@buffer)
+        @buffer = []
+      rescue Exception
+        # Do nothing -- @buffer stays the same implicitly
+      end
     end
 
   #  def handle_new_message
